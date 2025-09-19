@@ -1,0 +1,41 @@
+{{ define "form" -}}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Submit a Number</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 640px; margin: 4rem auto; padding: 0 1rem; }
+    form { display: grid; gap: 1rem; }
+    label { font-weight: 600; }
+    input[type="number"] { padding: .6rem .7rem; font-size: 1rem; }
+    button { padding: .6rem .9rem; font-size: 1rem; cursor: pointer; }
+    .msg { background: #f6f8fa; padding: .75rem 1rem; border-radius: .5rem; }
+  </style>
+</head>
+<body>
+  <h1>Submit a Number</h1>
+
+  {{ if .Message }}
+    <div class="msg">{{ .Message }}</div>
+  {{ end }}
+
+  <form method="post" action="{{ .Action }}">
+    <label for="value">Value</label>
+    <input
+      id="value"
+      name="value"
+      type="number"
+      inputmode="numeric"
+      step="{{ .Step }}"
+      min="{{ .Min }}"
+      placeholder="e.g. 42"
+      required
+      value="{{ .Default }}"
+    >
+    <button type="submit">Send</button>
+  </form>
+</body>
+</html>
+{{- end }}
